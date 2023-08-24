@@ -19,7 +19,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @RequestMapping(value = "/add/employee", method = RequestMethod.GET)
-    public Employee addEmployee(@RequestParam("name") String name, @RequestParam("empId") String empId) {
+    public Employee addEmployee(@RequestParam("name") String name, @RequestParam("empId") String empId) throws InterruptedException {
 
         return employeeService.createEmployee(name, empId);
 

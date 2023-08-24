@@ -39,15 +39,26 @@ public class RetentionPolicyDemo {
     }
 }
 
+/**
+ * Will be used at compile time and removed at runtime
+ * Realtime example is @Override annotation will be used at compile time and removed in runtime
+ */
 @Retention(RetentionPolicy.SOURCE)
 @interface SourceRetention {
     String value() default "SOURCE";
 }
+
+/**
+ * Will be attached in .class file and removed at runtime
+ */
 @Retention(RetentionPolicy.CLASS)
 @interface ClassRetention {
     String value() default "CLASS";
 }
 
+/**
+ * Will be retained at runtime
+ */
 @Retention(RetentionPolicy.RUNTIME)
 @interface RuntimeRetention {
     String value() default "RUNTIME";

@@ -1,5 +1,6 @@
 package org.example.aop.service;
 
+import org.example.aop.annotations.LogExecutionTime;
 import org.example.aop.model.Employee;
 import org.springframework.stereotype.Service;
 
@@ -10,8 +11,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class EmployeeService {
 
-    public Employee createEmployee(String name, String empId) {
-
+    @LogExecutionTime
+    public Employee createEmployee(String name, String empId) throws InterruptedException {
+        Thread.sleep(1000);
         Employee emp = new Employee();
         emp.setName(name);
         emp.setEmpId(empId);
