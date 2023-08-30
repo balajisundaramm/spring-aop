@@ -65,7 +65,8 @@ public class EcommerceOrder {
                 stringListEntry.getValue().stream().forEach(order -> {
                     Product product = productList.stream().filter(p -> p.getId().equalsIgnoreCase(order.getProductId())).findFirst().get();
                     result.put(product.getName(), product.getQuantity() - order.getQuantity());
-                    user.setBalance(user.getBalance() - sum.get() + maxSC[0]);
+                    User user1 = userList.stream().filter(u -> u.getUserId().equalsIgnoreCase(stringListEntry.getKey())).findFirst().get();
+                    user1.setBalance(user1.getBalance() - sum.get() + maxSC[0]);
                 });
             }
         });
