@@ -1,10 +1,8 @@
 package org.example.aop.streams;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -24,8 +22,10 @@ public class StreamPrograms {
 //        removeDuplicates();
 //        sortBy();
 //        findMaxAndMin();
-        findSecondMinAndMax();
-        new StreamPrograms().getSecondHighestSalaryName();
+//        findSecondMinAndMax();
+//        new StreamPrograms().getSecondHighestSalaryName();
+//        findLongestString();
+        new StreamPrograms().createEmployeeMap();
     }
 
     /**
@@ -85,6 +85,27 @@ public class StreamPrograms {
         Supplier<Stream<Integer>> integerStream = () -> Stream.of(1, 4, 6, 2, 7);
         System.out.println(integerStream.get().distinct().sorted().skip(1).findFirst());
         System.out.println(integerStream.get().distinct().sorted(Comparator.reverseOrder()).skip(2).max(Integer::compareTo));
+    }
+
+
+    private static void findLongestString() {
+        Supplier<Stream<String>> stream = () -> Stream.of("Abhi", "balaji", "Dheerkkavan");
+        Optional<String> optionalS = stream.get().reduce((left, right) -> left.length() > right.length() ? left : right);
+        System.out.println(optionalS.get());
+    }
+
+    private void createEmployeeMap() {
+        Employee e = new Employee("Balaji", 50000);
+        Employee e1 = new Employee("Abhi", 70000);
+        Employee e2 = new Employee("Sandhiya", 80000);
+        Employee e3 = new Employee("Dheerkkavan", 10000);
+        List<Employee> list = new ArrayList<>();
+        list.add(e);
+        list.add(e1);
+        list.add(e2);
+        list.add(e3);
+        Map<Double, Employee> collect = list.stream().collect(Collectors.toMap(Employee::getSalary, Function.identity()));
+        collect.entrySet().stream().map(Map.Entry::getKey).forEach(System.out::println);
     }
 
     private void getSecondHighestSalaryName() {

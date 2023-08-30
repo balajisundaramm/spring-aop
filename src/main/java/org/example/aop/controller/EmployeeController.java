@@ -2,7 +2,12 @@ package org.example.aop.controller;
 
 import org.example.aop.model.Employee;
 import org.example.aop.service.EmployeeService;
+import org.springframework.aop.aspectj.annotation.PrototypeAspectInstanceFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.beans.factory.support.DefaultSingletonBeanRegistry;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,7 +25,9 @@ public class EmployeeController {
 
     @RequestMapping(value = "/add/employee", method = RequestMethod.GET)
     public Employee addEmployee(@RequestParam("name") String name, @RequestParam("empId") String empId) throws InterruptedException {
-
+        ApplicationContext context = new AnnotationConfigApplicationContext();
+        DefaultSingletonBeanRegistry autowireCapableBeanFactory = (DefaultSingletonBeanRegistry) context.getAutowireCapableBeanFactory();
+//        autowireCapableBeanFactory.registerSingleton();
         return employeeService.createEmployee(name, empId);
 
     }
